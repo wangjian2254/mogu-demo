@@ -60,8 +60,8 @@ public class MyActivity extends Activity {
             jna.add(jn);
             j.put("userlist", ja);
             j.put("nicklist", jna);
-            j.put("game_host", "192.168.1.18");
-//            j.put("game_host", "mogu-gameserver.mmggoomm.com");
+//            j.put("game_host", "192.168.1.18");
+            j.put("game_host", "mogu-gameserver.mmggoomm.com");
             j.put("game_point", 3001);
             j.put("token", token);
 
