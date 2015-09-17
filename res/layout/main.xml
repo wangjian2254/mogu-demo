@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <ScrollView android:layout_width="fill_parent" android:layout_height="240dp">
+
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/btn_startGame" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="开始游戏" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_uploadGamePoint" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="上传积分，进度" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_uploadEndGamePoint" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="上传最终结果数据" android:onClick="sendData"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/btn_pushGameDataToUser" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="向用户发送自定义数据" android:onClick="sendData"/>
+
+
+            <Button android:id="@+id/btn_pushGameDataToUsers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="向多用户发送自定义数据" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button android:id="@+id/btn_pushGameDataToAllUser" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="向所有用户发送自定义数据" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_pushPropertyDataToUser" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="向用户发送道具数据" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button android:id="@+id/btn_pushPropertyDataToUsers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="向多个用户发送道具数据" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button android:id="@+id/btn_pushPropertyDataToAllUser" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="向所有用户发送道具数据" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_sendChatToUser" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="发送私聊内容" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button android:id="@+id/btn_sendChatToAllUser" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="发送谈话内容" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_quiteRoom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="踢人" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button android:id="@+id/btn_getMembers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="获取当前用户列表" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_quiteRoom2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="退出当前房间" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+
+        <Button android:id="@+id/btn_isMaster" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="判断自己是否房主" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_query_my_prop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="发出请求查询自己的道具" android:onClick="sendData"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/btn_add_game_prop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="增加道具" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_used_game_prop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="消耗道具" android:onClick="sendData"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </ScrollView>
+    <TextView android:id="@+id/txtlog"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:text="Hello World, MyActivity"
+            />
+</LinearLayout>
+
