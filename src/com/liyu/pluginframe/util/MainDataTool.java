@@ -72,15 +72,15 @@ public class MainDataTool {
 
     /**
      * 获取用户信息、包括房间信息
-     * @param   result 句柄
+     * @param   mainactivity 句柄
      */
-    public static void getUserInfoJSON(String result){
-//        con = mainactivity.getApplicationContext();
-//        appcode = con.getPackageName();
-//        appname =  con.getPackageManager().getApplicationLabel(con.getApplicationInfo()).toString();
+    public static void getUserInfoJSON(Activity mainactivity){
+        con = mainactivity.getApplicationContext();
+        appcode = con.getPackageName();
+        appname =  con.getPackageManager().getApplicationLabel(con.getApplicationInfo()).toString();
 
         JSONObject j=null;
-//        String result = mainactivity.getIntent().getExtras().getString("user");
+        String result = mainactivity.getIntent().getExtras().getString("user");
         if(result!=null){
             try {
                 j=new JSONObject(result);

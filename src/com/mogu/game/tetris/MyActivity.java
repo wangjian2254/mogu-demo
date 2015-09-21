@@ -1,12 +1,14 @@
-package com.example.myapp;
+package com.mogu.game.tetris;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import com.liyu.pluginframe.util.GameService;
 import com.liyu.pluginframe.util.IGameSync;
 import com.liyu.pluginframe.util.MainDataTool;
 import com.liyu.pluginframe.util.UserInfo;
+import com.mogu.game.tetris.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MyActivity extends Activity {
-    private static String username = "aaa1111";
+//    private static String username = "aaa1111";
     private static String appcode = "com.mogu.game.tetris";
     private static String appcode_dt_id = "com.mogu.game.tetris";
     private static String roomid = "10199ae8-9ec2-4c70-b75c-ac81f2039252";
@@ -25,6 +27,7 @@ public class MyActivity extends Activity {
     private boolean testing=true;
 
     private TextView txtlog=null;
+    private UserInfo userInfo;
 
     /**
      * Called when the activity is first created.
@@ -36,43 +39,43 @@ public class MyActivity extends Activity {
 
         txtlog = (TextView)findViewById(R.id.txtlog);
 
-        JSONObject j = new JSONObject();
-        try {
-            j.put("username", username);
-            j.put("nickname", "昵称");
-            j.put("jid", username+"@openfire.mmggoomm.com");
-            j.put("debug", true);
-
-            j.put("version", 2);
-            j.put("spaceid", roomid);
-            j.put("roomid", roomid);
-            j.put("token", token);
-            j.put("appcode_dt_id", appcode_dt_id);
-            j.put("appcode", appcode);
-            j.put("author", username) ;
-            JSONObject ju=null;
-            JSONObject jn=null;
-            ArrayList<JSONObject> ja=new ArrayList<JSONObject>();
-            ArrayList<JSONObject> jna=new ArrayList<JSONObject>();
-            ju=new JSONObject();
-            jn=new JSONObject();
-            ju.put("username", username);
-            ju.put("head", 1);
-
-            jn.put("username", username);
-            jn.put("nickname", "昵称");
-            ja.add(ju);
-            jna.add(jn);
-            j.put("userlist", ja);
-            j.put("nicklist", jna);
-//            j.put("game_host", "192.168.1.18");
-            j.put("game_host", "mogu-gameserver.mmggoomm.com");
-            j.put("game_point", 3001);
-            j.put("token", token);
-
-        } catch (JSONException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+//        JSONObject j = new JSONObject();
+//        try {
+//            j.put("username", username);
+//            j.put("nickname", "昵称");
+//            j.put("jid", username+"@openfire.mmggoomm.com");
+//            j.put("debug", true);
+//
+//            j.put("version", 2);
+//            j.put("spaceid", roomid);
+//            j.put("roomid", roomid);
+//            j.put("token", token);
+//            j.put("appcode_dt_id", appcode_dt_id);
+//            j.put("appcode", appcode);
+//            j.put("author", username) ;
+//            JSONObject ju=null;
+//            JSONObject jn=null;
+//            ArrayList<JSONObject> ja=new ArrayList<JSONObject>();
+//            ArrayList<JSONObject> jna=new ArrayList<JSONObject>();
+//            ju=new JSONObject();
+//            jn=new JSONObject();
+//            ju.put("username", username);
+//            ju.put("head", 1);
+//
+//            jn.put("username", username);
+//            jn.put("nickname", "昵称");
+//            ja.add(ju);
+//            jna.add(jn);
+//            j.put("userlist", ja);
+//            j.put("nicklist", jna);
+////            j.put("game_host", "192.168.1.18");
+//            j.put("game_host", "mogu-gameserver.mmggoomm.com");
+//            j.put("game_point", 3001);
+//            j.put("token", token);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
 
 
 
@@ -334,7 +337,6 @@ public class MyActivity extends Activity {
             }
         });
 
-        MainDataTool.getUserInfoJSON(j.toString());
 
     }
 
@@ -356,7 +358,7 @@ public class MyActivity extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                MainDataTool.pushGameDataToUser(gamedata, username);
+                MainDataTool.pushGameDataToUser(gamedata, userInfo.getUsername());
                 break;
             case R.id.btn_pushGameDataToUsers:
                 JSONObject gamedata1 = new JSONObject();
@@ -365,7 +367,7 @@ public class MyActivity extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                String[] u1 = {username};
+                String[] u1 = {userInfo.getUsername()};
                 MainDataTool.pushGameDataToUsers(gamedata1, u1);
                 break;
             case R.id.btn_pushGameDataToAllUser:
@@ -378,23 +380,23 @@ public class MyActivity extends Activity {
                 MainDataTool.pushGameDataToAllUser(gamedata2);
                 break;
             case R.id.btn_pushPropertyDataToUser:
-                MainDataTool.pushPropertyDataToUser("proper1", username);
+                MainDataTool.pushPropertyDataToUser("proper1", userInfo.getUsername());
                 break;
             case R.id.btn_pushPropertyDataToUsers:
-                String[] u2 = {username};
+                String[] u2 = {userInfo.getUsername()};
                 MainDataTool.pushPropertyDataToUsers("proper2", u2);
                 break;
             case R.id.btn_pushPropertyDataToAllUser:
                 MainDataTool.pushPropertyDataToAllUser("proper2");
                 break;
             case R.id.btn_sendChatToUser:
-                MainDataTool.sendChatToUser("some chat", username);
+                MainDataTool.sendChatToUser("some chat", userInfo.getUsername());
                 break;
             case R.id.btn_sendChatToAllUser:
                 MainDataTool.sendChatToAllUser("some chat");
                 break;
             case R.id.btn_quiteRoom:
-                MainDataTool.quiteRoom(username);
+                MainDataTool.quiteRoom(userInfo.getUsername());
                 break;
             case R.id.btn_getMembers:
                 List<String> list = MainDataTool.getMembers();
@@ -427,5 +429,17 @@ public class MyActivity extends Activity {
                 break;
 
         }
+    }
+
+    public void onResume(){
+        super.onResume();
+        MainDataTool.getUserInfoJSON(this);
+
+        userInfo = MainDataTool.getUserInfo();
+    }
+
+    public void onPause(){
+        super.onPause();
+        GameService.getInstance().quite_dt();
     }
 }

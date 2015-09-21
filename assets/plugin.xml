@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 插件提供的功能(类) -->
+<plugin-features>
+    <!-- version 为plugin 版本，积分游戏为1 ；多人游戏为2-->
+    <version>2</version>
+	<!-- intent 为Activity，key =main 为插件入口 action 为入口Activity-->
+	<intent action="com.mogu.game.tetris.MyActivity" key="main"></intent>
+
+	<!-- code 为插件与蘑菇服务器交互的身份id ；多人游戏需要-->
+	<code>176</code>
+	<!-- type 为插件的类型 game 为游戏类型 -->
+	<type>game</type>
+    <!-- 是否支持蘑菇游戏房间 ；多人游戏需要-->
+	<gameroom>true</gameroom>
+    <!-- 蘑菇游戏房间 最多人数 ；多人游戏需要-->
+	<maxusers>6</maxusers>
+
+</plugin-features>
