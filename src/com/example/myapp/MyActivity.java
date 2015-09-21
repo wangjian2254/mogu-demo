@@ -3,6 +3,7 @@ package com.example.myapp;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import com.liyu.pluginframe.util.IGameSync;
 import com.liyu.pluginframe.util.MainDataTool;
 import com.liyu.pluginframe.util.UserInfo;
@@ -23,6 +24,8 @@ public class MyActivity extends Activity {
     private boolean inited=true;
     private boolean testing=true;
 
+    private TextView txtlog=null;
+
     /**
      * Called when the activity is first created.
      */
@@ -30,6 +33,8 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        txtlog = (TextView)findViewById(R.id.txtlog);
 
         JSONObject j = new JSONObject();
         try {
@@ -74,102 +79,257 @@ public class MyActivity extends Activity {
         MainDataTool.setIGameSync(new IGameSync() {
             @Override
             public void syncStartGame() {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append("开始游戏");
+                    }
+                });
 
             }
 
             @Override
-            public void syncGamePoints(String user, String point) {
+            public void syncGamePoints(final String user, final String point) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(user+"：发送积分:"+point);
+                    }
+                });
 
             }
 
             @Override
-            public void syncEndGamePoints(String user, String point) {
+            public void syncEndGamePoints(final String user, final String point) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(user+"：发送结束积分:"+point);
+                    }
+                });
 
             }
 
             @Override
             public void syncEndGame() {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append("退出游戏");
+                    }
+                });
 
             }
 
             @Override
-            public void syncEndGame(String from) {
+            public void syncEndGame(final String from) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(from+"：把我踢出游戏");
+                    }
+                });
 
             }
 
             @Override
-            public void syncGameData(String from, JSONObject jsonObject) {
+            public void syncGameData(final String from, final JSONObject jsonObject) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(from+"：发送数据："+jsonObject.toString());
+                    }
+                });
 
             }
 
             @Override
-            public void syncGameData(String from, String[] to, JSONObject jsonObject) {
+            public void syncGameData(final String from, final String[] to, final JSONObject jsonObject) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(String tuser : to){
+                            txtlog.append("\n");
+                            txtlog.append(from+"：向："+tuser+"发送数据："+jsonObject.toString());
+                        }
+                    }
+                });
 
             }
 
             @Override
-            public void syncGamePropertyInfo(String from, String property_flag) {
+            public void syncGamePropertyInfo(final String from, final String property_flag) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(from+"：使用道具："+property_flag);
+                    }
+                });
 
             }
 
             @Override
-            public void syncGamePropertyInfo(String from, String[] to, String property_flag) {
+            public void syncGamePropertyInfo(final String from, final String[] to, final String property_flag) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(String tuser : to){
+                            txtlog.append("\n");
+                            txtlog.append(from+"：向："+tuser+"使用道具："+property_flag);
+                        }
+                    }
+                });
 
             }
 
             @Override
-            public void syncChat(String from, String msg) {
+            public void syncChat(final String from, final String msg) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(from+"：发送信息："+msg);
+                    }
+                });
 
             }
 
             @Override
-            public void syncChat(String from, String to, String msg) {
+            public void syncChat(final String from, final String to, final String msg) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(from+"：向:"+to+"发送信息："+msg);
+                    }
+                });
 
             }
 
             @Override
-            public void syncMemberChange(String user, boolean in, JSONObject userinfo) {
+            public void syncMemberChange(final String user, final boolean in, final JSONObject userinfo) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(in){
+                            txtlog.append("\n");
+                            txtlog.append(user+"：加入房间:"+ userinfo.toString());
+                        }else{
+                            txtlog.append("\n");
+                            txtlog.append(user+"：退出房间:");
+                        }
+                    }
+                });
+
 
             }
 
 
             @Override
-            public void syncQuiteRoomByUser(String user) {
+            public void syncQuiteRoomByUser(final String user) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(user+"：退出房间");
+                    }
+                });
 
             }
 
             @Override
-            public void syncRoomMembers(List<String> usernames, Map<String, UserInfo> usermap) {
+            public void syncRoomMembers(final List<String> usernames, final Map<String, UserInfo> usermap) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(String tuser : usernames){
+
+                            txtlog.append("\n");
+                            txtlog.append(tuser + "：个人信息：" + usermap.get(tuser).toString());
+                        }
+                    }
+                });
 
             }
 
             @Override
             public void syncInRoom() {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append("进入房间");
+                    }
+                });
 
             }
 
             @Override
             public void syncQuiteRoom() {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append("：退出房间");
+                    }
+                });
 
             }
 
             @Override
-            public void syncGameInfo(JSONObject json) {
+            public void syncGameInfo(final JSONObject json) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append("同步游戏数据："+json.toString());
+                    }
+                });
 
             }
 
             @Override
-            public void syncUserPropertyInfo(Map<String, Integer> propinfo) {
+            public void syncUserPropertyInfo(final Map<String, Integer> propinfo) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(String tuser : propinfo.keySet()){
+                            txtlog.append("\n");
+                            txtlog.append(tuser + "：道具数量：" + propinfo.get(tuser).toString());
+                        }
+                    }
+                });
 
             }
 
             @Override
-            public void syncResultAddPropertyInfo(String prop_flag, int num, boolean success) {
+            public void syncResultAddPropertyInfo(final String prop_flag, final int num, final boolean success) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(prop_flag + "：道具添加："+num +"效果："+ success);
+                    }
+                });
 
             }
 
             @Override
-            public void syncUsedProperty(String prop_flag, int num, boolean success) {
+            public void syncUsedProperty(final String prop_flag, final int num, final boolean success) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append(prop_flag + "：道具使用："+num +"效果："+ success);
+                    }
+                });
 
             }
         });
@@ -237,13 +397,24 @@ public class MyActivity extends Activity {
                 MainDataTool.quiteRoom(username);
                 break;
             case R.id.btn_getMembers:
-                MainDataTool.getMembers();
+                List<String> list = MainDataTool.getMembers();
+                for(String tuser : list){
+                    txtlog.append("\n");
+                    txtlog.append(tuser + "：在房间");
+                }
                 break;
             case R.id.btn_quiteRoom2:
                 MainDataTool.quiteRoom();
                 break;
             case R.id.btn_isMaster:
                 MainDataTool.isMaster();
+                txtlog.append("\n");
+                if(MainDataTool.isMaster()){
+                    txtlog.append("我是房主");
+                }else{
+                    txtlog.append("我不是房主");
+                }
+
                 break;
             case R.id.btn_query_my_prop:
                 MainDataTool.query_my_prop();
