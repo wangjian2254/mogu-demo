@@ -397,4 +397,26 @@ public class MainDataTool {
         GameService.getInstance().used_prop_by_appcode_username(appcode, prop_flag, num);
     }
 
+    /**
+     * 保存我的游戏信息
+     * @param json
+     */
+    public static void save_game_info_by_appcode_username(String json){
+        GameService.getInstance().save_game_info_by_appcode_username(appcode, json);
+    }
+
+    /**
+     * 获取我的游戏信息
+     */
+    public static void get_game_info_by_appcode_username(){
+        GameService.getInstance().get_game_info_by_appcode_username(appcode);
+    }
+
+    /**
+     * 清空房间内积分信息
+     */
+    public static void clean_point(){
+        GameService.getInstance().clean_point(appcode, roomid);
+    }
+
 }
