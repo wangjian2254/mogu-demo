@@ -428,6 +428,30 @@ public class MyActivity extends Activity {
                 MainDataTool.add_game_prop("proper1", 1);
                 break;
 
+            case R.id.btn_save_game_info_by_appcode_username:
+                JSONObject gamedata3 = new JSONObject();
+                try {
+                    gamedata3.put("gamedata3", 1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                MainDataTool.save_game_info_by_appcode_username(gamedata3.toString());
+                txtlog.append("\n");
+                txtlog.append("保存游戏信息");
+                break;
+
+            case R.id.btn_get_game_info_by_appcode_username:
+                MainDataTool.get_game_info_by_appcode_username();
+                txtlog.append("\n");
+                txtlog.append("获取我的游戏信息");
+                break;
+
+            case R.id.btn_clear_point:
+                MainDataTool.clean_point();
+                txtlog.append("\n");
+                txtlog.append("清空房间内的积分");
+                break;
+
         }
     }
 

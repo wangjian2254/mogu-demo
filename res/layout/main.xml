@@ -53,6 +53,14 @@
             <Button android:id="@+id/btn_add_game_prop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="增加道具" android:onClick="sendData"/>
             <Button android:id="@+id/btn_used_game_prop" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="消耗道具" android:onClick="sendData"/>
         </LinearLayout>
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/btn_save_game_info_by_appcode_username" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保存游戏信息" android:onClick="sendData"/>
+            <Button android:id="@+id/btn_get_game_info_by_appcode_username" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="获取游戏信息" android:onClick="sendData"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <Button android:id="@+id/btn_clear_point" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保存游戏信息" android:onClick="sendData"/>
+        </LinearLayout>
 
 
     </LinearLayout>
