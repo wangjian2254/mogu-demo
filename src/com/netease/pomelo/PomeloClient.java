@@ -201,7 +201,7 @@ public class PomeloClient {
 			}
 			// broadcast message
 			else
-				emit(jsonObject.getString("route"), jsonObject);
+				emit(jsonObject.getString("route"), jsonObject.getJSONObject("body"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

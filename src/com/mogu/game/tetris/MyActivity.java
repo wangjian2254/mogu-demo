@@ -374,6 +374,7 @@ public class MyActivity extends Activity {
                 JSONObject gamedata2 = new JSONObject();
                 try {
                     gamedata2.put("gamedata", 2);
+                    gamedata2.put("from", userInfo.getUsername());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
