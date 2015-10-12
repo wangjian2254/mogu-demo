@@ -132,4 +132,13 @@ public interface IGameSync {
 
     public void syncUsedProperty(String prop_flag, int num, boolean success);
 
+
+    /**
+     * 错误信息
+     * by:王健 at:2015-08-09
+     * @param message
+     * @param status_code
+     */
+    public void syncError(String message, int status_code);
+
 }
