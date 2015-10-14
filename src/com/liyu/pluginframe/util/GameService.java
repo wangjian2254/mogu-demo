@@ -335,7 +335,7 @@ public class GameService {
      * by:王健 at:2015-08-09
      */
     public void quite_dt() {
-        if(pomeloClient==null){
+        if(pomeloClient==null||!pomeloClient.hasConnect()){
             return;
         }
         pomeloClient.disconnect();
