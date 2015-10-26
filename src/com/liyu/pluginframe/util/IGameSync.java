@@ -102,19 +102,31 @@ public interface IGameSync {
 
     /**
      * 人员变动
+     * by:王健 at:2015-5-20
      * @param user 用户id
      * @param in  true为加入，false为推出
+     * @param userinfo json格式用户信息，如果是用户离开房间，参数为空
      */
     public void syncMemberChange(String user, boolean in, JSONObject userinfo);
 
-    /**
-     * 被提出房间
-     * @param user 用户id，被用户 user剔除房间
-     */
-    public void syncQuiteRoomByUser(String user);
+//    /**
+//     * 被提出房间
+//     * @param user 用户id，被用户 user剔除房间
+//     */
+//    public void syncQuiteRoomByUser(String user);
 
+    /**
+     * 获取当前房间内用户信息
+     * by:王健 at:2015-5-20
+     * @param usernames
+     * @param usermap
+     */
     public void syncRoomMembers(List<String> usernames, Map<String, UserInfo> usermap);
 
+    /**
+     * 成功进入房间的回调函数
+     * by:王健 at:2015-5-20
+     */
     public void syncInRoom();
 
     /**
@@ -124,20 +136,46 @@ public interface IGameSync {
     public void syncQuiteRoom();
 
 
+    /**
+     * 获取用户的游戏信息，游戏自行定义，满足json格式即可
+     * by:王健 at:2015-5-20
+     * @param json
+     */
     public void syncGameInfo(JSONObject json);
 
+    /**
+     *
+     * 用户在本游戏中各个道具数量
+     * by:王健 at:2015-5-20
+     * @param propinfo
+     */
     public void syncUserPropertyInfo(Map<String, Integer> propinfo);
 
+    /**
+     * 用户在本游戏中增加的道具数量
+     * by:王健 at:2015-5-20
+     * @param prop_flag   道具标示
+     * @param num         道具变动数量
+     * @param success     道具变动结果，true：变动成功；false：变动失败
+     */
     public void syncResultAddPropertyInfo(String prop_flag, int num, boolean success);
 
+    /**
+     *
+     * 用户使用道具记录
+     * by:王健 at:2015-5-20
+     * @param prop_flag  道具标示
+     * @param num        道具使用数量
+     * @param success    道具使用成功或失败
+     */
     public void syncUsedProperty(String prop_flag, int num, boolean success);
 
 
     /**
      * 错误信息
      * by:王健 at:2015-08-09
-     * @param message
-     * @param status_code
+     * @param message        错误信息
+     * @param status_code    错误码
      */
     public void syncError(String message, int status_code);
 
