@@ -847,7 +847,7 @@ public class GameService {
         }
     }
 
-    public void used_prop_by_appcode_username(String appcode, String prop_flag, int count){
+    public void used_prop_by_appcode_username(String appcode, final String prop_flag, final int count){
         try {
             JSONObject c= new JSONObject();
             c.put("appcode",appcode);
@@ -862,6 +862,9 @@ public class GameService {
                     JSONObject result = (JSONObject) doResult(message);
                     if(result!=null){
 //                        iGameSync.syncG
+                        iGameSync.syncUsedProperty(prop_flag,count,true);
+                    }else{
+                        iGameSync.syncUsedProperty(prop_flag,count,false);
                     }
                 }
             });
@@ -880,7 +883,22 @@ public class GameService {
                     if(!is_Room_sync()){
                         return;
                     }
-                    JSONObject result = (JSONObject) doResult(message);
+                    JSONArray result = (JSONArray) doResult(message);
+
+                    Map<String,Integer> map = new HashMap<String, Integer>();
+                    JSONObject obj = null;
+                    if(result!=null){
+                        for(int i=0;i<result.length();i++){
+                            try {
+                                obj = result.getJSONObject(i);
+                                map.put(obj.optString("flag"), obj.optInt("count"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    iGameSync.syncUserPropertyInfo(map);
 
                 }
             });
@@ -889,7 +907,7 @@ public class GameService {
         }
     }
 
-    public void add_prop_by_appcode_username(String appcode, String prop_flag, int count){
+    public void add_prop_by_appcode_username(String appcode, final String prop_flag, final int count){
         try {
             JSONObject c= new JSONObject();
             c.put("appcode",appcode);
@@ -902,6 +920,11 @@ public class GameService {
                         return;
                     }
                     JSONObject result = (JSONObject) doResult(message);
+
+                    if(result==null){
+                        iGameSync.syncResultAddPropertyInfo(prop_flag, count, false);
+                    }
+                    iGameSync.syncResultAddPropertyInfo(prop_flag, count, true);
 
                 }
             });
