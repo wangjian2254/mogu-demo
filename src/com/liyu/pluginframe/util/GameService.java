@@ -107,7 +107,13 @@ public class GameService {
     private Object doResult(JSONObject jsonObject) {
         boolean r = jsonObject.optBoolean("success", true);
         if (!r) {
-            iGameDtSync.syncError(jsonObject.optString("message", "服务器错误"), jsonObject.optInt("status_code", 500));
+            if(iGameDtSync==null){
+                iGameDtSync.syncError(jsonObject.optString("message", "服务器错误"), jsonObject.optInt("status_code", 500));
+            }
+            if(iGameSync==null){
+                iGameSync.syncError(jsonObject.optString("message", "服务器错误"), jsonObject.optInt("status_code", 500));
+            }
+
             return null;
         }
         JSONObject result = jsonObject.optJSONObject("result");
@@ -329,7 +335,7 @@ public class GameService {
      * by:王健 at:2015-08-09
      */
     public void quite_dt() {
-        if(pomeloClient==null){
+        if(pomeloClient==null||!pomeloClient.hasConnect()){
             return;
         }
         pomeloClient.disconnect();

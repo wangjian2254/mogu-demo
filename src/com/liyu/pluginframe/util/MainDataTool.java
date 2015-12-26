@@ -187,7 +187,7 @@ public class MainDataTool {
             e.printStackTrace();
         }
         GameService.getInstance().upload_end_point(appcode, roomid, point);
-        return syncGameRoom(UPLOAD_END_GAME_POINT, jsonObject.toString());
+        return 0;
     }
 
     /**
@@ -374,14 +374,7 @@ public class MainDataTool {
     public static void query_my_prop(){
         GameService.getInstance().get_user_prop_by_appcode_username(appcode);
     }
-//    /**
-//     * 查询游戏中所有的道具种类
-//     * @return
-//     */
-//    public static void query_game_prop(){
-//
-//    }
-//
+
     /**
      * 增加道具
      * @return

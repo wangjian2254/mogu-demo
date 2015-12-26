@@ -235,17 +235,17 @@ public class MyActivity extends Activity {
             }
 
 
-            @Override
-            public void syncQuiteRoomByUser(final String user) {
-                txtlog.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        txtlog.append("\n");
-                        txtlog.append(user+"：退出房间");
-                    }
-                });
-
-            }
+//            @Override
+//            public void syncQuiteRoomByUser(final String user) {
+//                txtlog.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        txtlog.append("\n");
+//                        txtlog.append(user+"：退出房间");
+//                    }
+//                });
+//
+//            }
 
             @Override
             public void syncRoomMembers(final List<String> usernames, final Map<String, UserInfo> usermap) {
@@ -334,6 +334,17 @@ public class MyActivity extends Activity {
                     }
                 });
 
+            }
+
+            @Override
+            public void syncError(final String message, final int status_code) {
+                txtlog.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        txtlog.append("\n");
+                        txtlog.append( "错误信息："+message +"：状态码："+ status_code);
+                    }
+                });
             }
         });
 
