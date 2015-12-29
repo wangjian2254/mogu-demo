@@ -16,6 +16,7 @@ public class UserInfo {
 
 
     private int head;
+    private String icon_url;
     private String rank;
     private int point;
 
@@ -86,5 +87,13 @@ public class UserInfo {
 
     public void setHead(int head) {
         this.head = head;
+    }
+
+    public String getIcon_url() {
+        return icon_url;
+    }
+
+    public void setIcon_url(String icon_url) {
+        this.icon_url = icon_url;
     }
 }

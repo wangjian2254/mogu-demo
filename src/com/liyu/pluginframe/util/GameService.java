@@ -413,6 +413,7 @@ public class GameService {
                             userInfo.setUsername(user.optString("username"));
                             userInfo.setNickname(user.optString("nickname"));
                             userInfo.setHead(user.optInt("head"));
+                            userInfo.setIcon_url(user.optString("icon_url"));
                             userInfo.setPoint(user.optInt("point"));
                             userInfo.setRank(user.optString("rank"));
 
@@ -467,6 +468,7 @@ public class GameService {
                     userInfo.setUsername(user.optString("username"));
                     userInfo.setNickname(user.optString("nickname"));
                     userInfo.setHead(user.optInt("head"));
+                    userInfo.setIcon_url(user.optString("icon_url"));
                     userInfo.setPoint(user.optInt("point"));
                     userInfo.setRank(user.optString("rank"));
 
