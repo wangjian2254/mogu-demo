@@ -631,7 +631,21 @@ public class GameService {
                     JSONArray users = result.optJSONArray("users");
                     if(users!=null&&users.length()>0){
                         String[] us = new String[users.length()];
-                        iGameSync.syncGameData(from, us, result);
+                        boolean has_me = false;
+                        for(int i=0;i<users.length();i++){
+                            try {
+                                us[i] = users.getString(i);
+                                if(us[i].equals(username)){
+                                    has_me = true;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if(has_me){
+                            iGameSync.syncGameData(from, us, result);
+                        }
+
                     }else{
                         iGameSync.syncGameData(from, result);
                     }
@@ -654,7 +668,21 @@ public class GameService {
                     JSONArray users = result.optJSONArray("users");
                     if(users!=null&&users.length()>0){
                         String[] us = new String[users.length()];
-                        iGameSync.syncGamePropertyInfo(from, us, property_flag);
+                        boolean has_me = false;
+                        for(int i=0;i<users.length();i++){
+                            try {
+                                us[i] = users.getString(i);
+                                if(us[i].equals(username)){
+                                    has_me = true;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if(has_me){
+                            iGameSync.syncGamePropertyInfo(from, us, property_flag);
+                        }
+
                     }else{
                         iGameSync.syncGamePropertyInfo(from, property_flag);
                     }
