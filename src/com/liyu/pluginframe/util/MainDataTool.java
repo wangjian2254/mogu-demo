@@ -390,6 +390,20 @@ public class MainDataTool {
         GameService.getInstance().used_prop_by_appcode_username(appcode, prop_flag, num);
     }
 
+
+
+    public static void used_game_prop(String prop_flag, int num, final String[] to, final GameService.UsedGameResult usedGameResult){
+        GameService.getInstance().used_prop_by_appcode_username(appcode, prop_flag, num, to, new GameService.UsedGameResult() {
+            @Override
+            public void used_game_prop_result(boolean result, String prop_flag2, String msg) {
+                if(result){
+                    pushPropertyDataToUsers(prop_flag2,to);
+                }
+                usedGameResult.used_game_prop_result(result, prop_flag2, msg);
+            }
+        });
+    }
+
     /**
      * 保存我的游戏信息
      * @param json

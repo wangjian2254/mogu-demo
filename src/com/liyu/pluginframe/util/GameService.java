@@ -631,20 +631,20 @@ public class GameService {
                     JSONArray users = result.optJSONArray("users");
                     if(users!=null&&users.length()>0){
                         String[] us = new String[users.length()];
-                        boolean has_me = false;
+//                        boolean has_me = false;
                         for(int i=0;i<users.length();i++){
                             try {
                                 us[i] = users.getString(i);
-                                if(us[i].equals(username)){
-                                    has_me = true;
-                                }
+//                                if(us[i].equals(username)){
+//                                    has_me = true;
+//                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                        if(has_me){
+//                        if(has_me||from.equals(username)){
                             iGameSync.syncGameData(from, us, result);
-                        }
+//                        }
 
                     }else{
                         iGameSync.syncGameData(from, result);
@@ -668,20 +668,15 @@ public class GameService {
                     JSONArray users = result.optJSONArray("users");
                     if(users!=null&&users.length()>0){
                         String[] us = new String[users.length()];
-                        boolean has_me = false;
                         for(int i=0;i<users.length();i++){
                             try {
                                 us[i] = users.getString(i);
-                                if(us[i].equals(username)){
-                                    has_me = true;
-                                }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                        if(has_me){
-                            iGameSync.syncGamePropertyInfo(from, us, property_flag);
-                        }
+                        iGameSync.syncGamePropertyInfo(from, us, property_flag);
 
                     }else{
                         iGameSync.syncGamePropertyInfo(from, property_flag);
@@ -901,6 +896,39 @@ public class GameService {
                         iGameSync.syncUsedProperty(prop_flag,count,true);
                     }else{
                         iGameSync.syncUsedProperty(prop_flag,count,false);
+                    }
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public interface UsedGameResult{
+        public void used_game_prop_result(boolean result, String prop_flag, String msg);
+    }
+
+
+    public void used_prop_by_appcode_username(String appcode, final String prop_flag, final int count, final String[] to, final UsedGameResult usedGameResult){
+        try {
+            JSONObject c= new JSONObject();
+            c.put("appcode",appcode);
+            c.put("prop_flag",prop_flag);
+            c.put("count",count);
+            pomeloClient.request("connector.gameHandler.used_prop_by_appcode_username", c, new DataCallBack() {
+                @Override
+                public void responseData(JSONObject message) {
+                    if(!is_Room_sync()){
+                        return;
+                    }
+                    JSONObject result = (JSONObject) doResult(message);
+                    if(result!=null){
+//                        iGameSync.syncG
+//                        iGameSync.syncUsedProperty(prop_flag,count,true);
+
+                    }else{
+//                        iGameSync.syncUsedProperty(prop_flag,count,false);
+                        usedGameResult.used_game_prop_result(false, prop_flag,message.optString("message", "服务器错误"));
                     }
                 }
             });
